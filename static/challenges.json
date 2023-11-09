@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "title": "Remainder from Two Numbers",
+      "description": "Write a function that accepts two numbers as parameters. The first parameter divided by the second parameter will have a remainder, possibly zero. Return that value.",
+      "test": [5, 2],
+      "expected": 1
+    }
+  ]
+}
