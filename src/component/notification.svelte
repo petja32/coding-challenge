@@ -20,12 +20,12 @@
     transition:fly={{ delay: 100, duration: 200, y: 100,easing: cubicInOut }}
     on:outroend={callback}
     role="alert"
-    class="mx-12 w-full border-2 border-black bg-white p-3"
+    class="mx-12 w-full bg-white-300 rounded-full py-3 px-8 p"
   >
     <div class="flex items-start gap-4">
-      <div class="flex-1">
+      <div class="flex-1 text-gray-200">
         <span>
-          <strong class="font-medium text-gray-900"> Test result: </strong>
+          <strong class="font-medium "> Result: </strong>
           {content}
         </span>
       </div>

@@ -14,6 +14,17 @@
     const { editor, languages } = await import("monaco-editor");
     let createdEditor: editor.IStandaloneCodeEditor;
 
+    const customTheme: editor.IStandaloneThemeData = {
+      base: "vs-dark",
+      inherit: true,
+      rules: [],
+      colors: {
+        "editor.background": "#00000000",
+      },
+    };
+
+    editor.defineTheme("custom-theme", customTheme);
+
     self.MonacoEnvironment = {
       getWorker: function (_: any, label: string) {
         if (label === "json") {
@@ -36,7 +47,7 @@
 
     createdEditor = editor.create(editorContainer, {
       language: "typescript",
-      theme: "vs-light",
+      theme: "custom-theme",
       minimap: {
         enabled: false,
       },
@@ -57,7 +68,7 @@
 </script>
 
 <div
-  class="h-96 w-full rounded-2xl overflow-hidden pt-4 border-black border-2 text-lg"
+  class="h-96 w-full rounded-2xl overflow-hidden pt-4 bg-gray-200 text-lg"
   bind:this={editorContainer}
 />
 

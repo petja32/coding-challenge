@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { create } from "canvas-confetti";
+  import { onMount, tick } from "svelte";
+  import { ConfettiCannon } from "svelte-canvas-confetti";
   import Editor from "../component/editor.svelte";
   import Notification from "../component/notification.svelte";
+  import { streak, last } from "$lib/store";
 
   let code: any;
   let challengeData: any;
   let title: string = "";
   let description: string = "";
-  let confetti: any;
-  let confettiContainer: any;
+  let confettiCannon = false;
+  let status = 0;
 
   let notificationShow: boolean;
   let notificationContent: string;
@@ -24,53 +25,60 @@
     return fn(challengeData.test[0], challengeData.test[1]);
   };
 
-  const testClicked = () => {
-    //notificationShow = true;
-    //notificationContent = runFunction();
-    confetti({
-      particleCount: 100,
-      spread: 160,
-    });
+  const testClicked = async () => {
+    notificationShow = true;
+    notificationContent = runFunction();
+  };
+
+  const submitClicked = async () => {
+    const result = runFunction();
+    if (result == challengeData.expected) {
+      status = 1;
+      streak.set($streak + 1);
+      last.set(new Date().getTime());
+      confettiCannon = false;
+      await tick();
+      confettiCannon = true;
+    } else {
+      status = -1;
+    }
   };
 
   const notificationCallback = () => {
     notificationShow = false;
   };
 
-  const createConfettiCanvas = () => {
-    confetti = create(confettiContainer, {
-      resize: true,
-      useWorker: true,
-    });
+  const checkLast = () => {
+    var today = new Date().setHours(0, 0, 0, 0);
+    var lastDay = new Date($last).setHours(0, 0, 0, 0);
+    if (today === lastDay) {
+      status = 1;
+    }
   };
 
   onMount(async () => {
     const day = 0; //new Date().getDate();
     const resp = await fetch("/challenges.json");
     const respJson = await resp.json();
+    checkLast();
     challengeData = respJson.data[day];
     title = challengeData.title;
     description = challengeData.description;
-    createConfettiCanvas();
   });
 </script>
 
-<h2 class="text-3xl font-bold mb-6 lg:mb-12">DAILY CODING CHALLENGE</h2>
-
-<div
-  style="pointer-events: none"
-  bind:this={confettiContainer}
-  class="fixed left-0 right-0 top-0 bottom-0 canvasContainer"
-/>
+<h2 class="text-3xl text-white-300 font-bold mb-6 lg:mb-12 font-ubuntu">
+  C0DLE
+</h2>
 
 <div class="group relative block w-full">
-  <div class="relative flex h-full rounded-2xl border-2 border-black bg-white">
-    <div class="p-4 sm:p-6 lg:p-8">
-      <h2 class="text-xl font-medium sm:text-2xl">
+  <div class="relative flex h-full rounded-2xl bg-gray-100">
+    <div class="text-white-100 p-4 sm:p-6 lg:p-8">
+      <h2 class="text-xl text-center font-medium sm:text-2xl">
         {title}
       </h2>
 
-      <p class="mt-4 text-sm sm:text-base">
+      <p class="mt-4 text-justify text-sm sm:text-base">
         {description}
       </p>
     </div>
@@ -84,9 +92,10 @@
 <div class="flex justify-between w-full mt-6">
   <button
     on:click={testClicked}
-    class="border-2 border-black py-3 px-8 flex-grow-1 bg-yellow-300 uppercase font-semibold"
+    style="min-width: 187px"
+    class="rounded-full py-2 px-10 flex-grow-1 bg-white-300 uppercase font-semibold"
   >
-    Test
+    Test code 😉
   </button>
 
   {#if notificationShow}
@@ -97,8 +106,29 @@
   {/if}
 
   <button
-    class="border-2 border-black py-3 px-8 flex-grow-1 bg-green-400 uppercase font-semibold"
+    class="rounded-full py-3 px-8 flex-grow-1 bg-green uppercase text-white-300 font-semibold"
+    style="min-width: 187px"
+    disabled={status == 1}
+    on:click={submitClicked}
   >
-    Submit
+    Submit {#if status == 0}🤔{:else if status == -1}😢{:else}😀{/if}
   </button>
 </div>
+<div
+  class="absolute flex justify-center items-center text-center right-32 top-32"
+>
+  <img src="/fire.png" alt="fire" srcset="" />
+  <span
+    style="-webkit-text-stroke: 2px black; text-stroke: 1px black; font-size: 96px; margin-top: 80px;"
+    class="absolute font-black text-white-300">{$streak}</span
+  >
+</div>
+
+{#if confettiCannon}
+  <ConfettiCannon
+    origin={[window.innerWidth * 0.7, window.innerHeight * 0.8]}
+    angle={-90}
+    spread={120}
+    force={25}
+  />
+{/if}
