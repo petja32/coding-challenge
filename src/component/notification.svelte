@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
   import { cubicInOut } from "svelte/easing"
-  export let content = "data";
+  export let content = "null";
   export let callback: any = null;
   let show = false;
 

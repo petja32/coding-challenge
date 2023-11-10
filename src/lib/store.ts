@@ -10,6 +10,7 @@ if (browser) {
 
 export const streak = writable(storedStreak || 0);
 export const last = writable(storedLast || 0);
+
 if (browser) {
   streak.subscribe((value) => (localStorage.streak = value));
   last.subscribe((value) => (localStorage.last = value));

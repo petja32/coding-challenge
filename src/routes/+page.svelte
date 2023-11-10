@@ -16,13 +16,27 @@
   let notificationContent: string;
 
   const runFunction = () => {
+    let functionParameters = code.split("(")[1].split(")")[0].split(",");
     let functionBody = code.substring(
       code.indexOf("{") + 1,
       code.lastIndexOf("}")
     );
-    let fn = new Function("a", "b", functionBody);
-
-    return fn(challengeData.test[0], challengeData.test[1]);
+    let fn;
+    switch (challengeData.test.length) {
+      case 2:
+        fn = new Function(
+          functionParameters[0],
+          functionParameters[1],
+          functionBody
+        );
+        return fn(challengeData.test[0], challengeData.test[1]);
+      case 1:
+        fn = new Function(functionParameters[0], functionBody);
+        return fn(challengeData.test[0]);
+      default:
+        fn = new Function(functionBody);
+        return fn();
+    }
   };
 
   const testClicked = async () => {
@@ -32,7 +46,11 @@
 
   const submitClicked = async () => {
     const result = runFunction();
-    if (result == challengeData.expected) {
+
+    if (
+      result == challengeData.expected ||
+      JSON.stringify(result) == JSON.stringify(challengeData.expected)
+    ) {
       status = 1;
       streak.set($streak + 1);
       last.set(new Date().getTime());
@@ -57,28 +75,28 @@
   };
 
   onMount(async () => {
-    const day = 0; //new Date().getDate();
+    const day = new Date().getDate();
     const resp = await fetch("/challenges.json");
     const respJson = await resp.json();
-    checkLast();
     challengeData = respJson.data[day];
     title = challengeData.title;
     description = challengeData.description;
+    checkLast();
   });
 </script>
 
-<h2 class="text-3xl text-white-300 font-bold mb-6 lg:mb-12 font-ubuntu">
+<h2 class="text-5xl text-white-300 font-black mb-6 lg:mb-12 font-ubuntu">
   C0DLE
 </h2>
 
 <div class="group relative block w-full">
-  <div class="relative flex h-full rounded-2xl bg-gray-100">
+  <div class="relative flex justify-center h-full rounded-2xl bg-gray-100">
     <div class="text-white-100 p-4 sm:p-6 lg:p-8">
-      <h2 class="text-xl text-center font-medium sm:text-2xl">
+      <h2 class="text-xl text-center font-bold sm:text-2xl">
         {title}
       </h2>
 
-      <p class="mt-4 text-justify text-sm sm:text-base">
+      <p class="mt-4 text-justify font-semibold text-sm sm:text-base">
         {description}
       </p>
     </div>
@@ -93,7 +111,7 @@
   <button
     on:click={testClicked}
     style="min-width: 187px"
-    class="rounded-full py-2 px-10 flex-grow-1 bg-white-300 uppercase font-semibold"
+    class="rounded-full py-2 px-10 flex-grow-1 bg-white-300 uppercase font-semibold hover:line-through"
   >
     Test code 😉
   </button>
@@ -106,7 +124,7 @@
   {/if}
 
   <button
-    class="rounded-full py-3 px-8 flex-grow-1 bg-green uppercase text-white-300 font-semibold"
+    class="rounded-full py-3 px-8 flex-grow-1 bg-green-200 uppercase text-white-300 font-semibold hover:line-through disabled:line-through disabled:bg-green-100"
     style="min-width: 187px"
     disabled={status == 1}
     on:click={submitClicked}
