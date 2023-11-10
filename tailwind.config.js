@@ -4,6 +4,7 @@ export default {
   theme: {
     fontFamily: {
       ubuntu: ["Ubuntu", "sans-serif"],
+      share: ["Share Tech Mono", "sans-serif"],
     },
     colors: {
       gray: {

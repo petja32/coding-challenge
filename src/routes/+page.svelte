@@ -85,18 +85,26 @@
   });
 </script>
 
-<h2 class="text-5xl text-white-300 font-black mb-6 lg:mb-12 font-ubuntu">
+<h2 class="hidden lg:block text-7xl text-center text-white-300 font-bold mb-6 lg:mb-12 font-share">
+  C0DLE - JS Edition
+</h2>
+
+<h2 class="lg:hidden text-5xl text-center text-white-300 font-bold mt-3 lg:mt-0 lg:mb-12 font-share">
   C0DLE
+</h2>
+
+<h2 class="lg:hidden text-2xl text-center text-white-300 font-bold lg:mt-0 lg:mb-12 font-share">
+  JS Edition
 </h2>
 
 <div class="group relative block w-full">
   <div class="relative flex justify-center h-full rounded-2xl bg-gray-100">
     <div class="text-white-100 p-4 sm:p-6 lg:p-8">
-      <h2 class="text-xl text-center font-bold sm:text-2xl">
+      <h2 class="text-xl text-center font-share font-bold sm:text-2xl">
         {title}
       </h2>
 
-      <p class="mt-4 text-justify font-semibold text-sm sm:text-base">
+      <p class="mt-4 text-justify font-semibold font-share text-sm sm:text-base">
         {description}
       </p>
     </div>
@@ -107,11 +115,10 @@
   <Editor bind:editorContent={code} />
 </div>
 
-<div class="flex justify-between w-full mt-6">
+<div class="relative flex justify-between w-full mt-6">
   <button
     on:click={testClicked}
-    style="min-width: 187px"
-    class="rounded-full py-2 px-10 flex-grow-1 bg-white-300 uppercase font-semibold hover:line-through"
+    class="rounded-full min-w-min font-share py-2 px-10 flex-grow-1 bg-white-300 uppercase font-semibold hover:line-through"
   >
     Test code 😉
   </button>
@@ -124,8 +131,7 @@
   {/if}
 
   <button
-    class="rounded-full py-3 px-8 flex-grow-1 bg-green-200 uppercase text-white-300 font-semibold hover:line-through disabled:line-through disabled:bg-green-100"
-    style="min-width: 187px"
+    class="rounded-full min-w-min py-3 px-8 flex-grow-1 bg-green-200 uppercase font-share text-white-300 font-semibold hover:line-through disabled:line-through disabled:bg-green-100"
     disabled={status == 1}
     on:click={submitClicked}
   >
@@ -133,12 +139,12 @@
   </button>
 </div>
 <div
-  class="absolute flex justify-center items-center text-center right-32 top-32"
+  class="relative lg:absolute flex justify-center items-center text-center mt-24 lg:mt-0 lg:right-32 lg:top-32 w-48"
 >
-  <img src="/fire.png" alt="fire" srcset="" />
+  <img src="/fire.png" alt="fire" width="100%" srcset="" />
   <span
-    style="-webkit-text-stroke: 2px black; text-stroke: 1px black; font-size: 96px; margin-top: 80px;"
-    class="absolute font-black text-white-300">{$streak}</span
+    style="-webkit-text-stroke: 2px black; text-stroke: 2px black; font-size: 96px; margin-top: 80px;"
+    class="font-share absolute text-white-300">{$streak}</span
   >
 </div>
 
