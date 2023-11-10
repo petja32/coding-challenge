@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private/  # Disallow crawling of any private sections
+Disallow: /admin/    # Disallow crawling of admin pages
+Disallow: /archives/ # Disallow crawling of archived challenges
