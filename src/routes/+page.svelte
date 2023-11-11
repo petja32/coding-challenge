@@ -4,6 +4,8 @@
   import Editor from "../component/editor.svelte";
   import Notification from "../component/notification.svelte";
   import { streak, last } from "$lib/store";
+  import Timer from "../component/timer.svelte";
+  import Streak from "../component/streak.svelte";
 
   let code: any;
   let challengeData: any;
@@ -16,35 +18,39 @@
   let notificationContent: string;
 
   const runFunction = () => {
-    let functionParameters = code.split("(")[1].split(")")[0].split(",");
-    let functionBody = code.substring(
-      code.indexOf("{") + 1,
-      code.lastIndexOf("}")
-    );
-    let fn;
-    switch (challengeData.test.length) {
-      case 2:
-        fn = new Function(
-          functionParameters[0],
-          functionParameters[1],
-          functionBody
-        );
-        return fn(challengeData.test[0], challengeData.test[1]);
-      case 1:
-        fn = new Function(functionParameters[0], functionBody);
-        return fn(challengeData.test[0]);
-      default:
-        fn = new Function(functionBody);
-        return fn();
+    try {
+      let functionParameters = code.split("(")[1].split(")")[0];
+      if (functionParameters.includes(",")) {
+        functionParameters = functionParameters.split(",");
+      }
+      let functionBody = code.substring(
+        code.indexOf("{") + 1,
+        code.lastIndexOf("}")
+      );
+      let fn;
+      switch (challengeData.test.length) {
+        case 2:
+          fn = new Function(
+            functionParameters[0],
+            functionParameters[1],
+            functionBody
+          );
+          return fn(challengeData.test[0], challengeData.test[1]);
+        case 1:
+          fn = new Function(functionParameters, functionBody);
+          return fn(challengeData.test[0]);
+        default:
+          fn = new Function(functionBody);
+          return fn();
+      }
+    } catch (e) {
+      status = -1;
+      setTimeout(() => (status = 0), 1500);
     }
   };
 
-  const testClicked = async () => {
-    notificationShow = true;
-    notificationContent = runFunction();
-  };
-
   const submitClicked = async () => {
+    if (status == -1 || status == 1) return;
     const result = runFunction();
 
     if (
@@ -59,6 +65,7 @@
       confettiCannon = true;
     } else {
       status = -1;
+      setTimeout(() => (status = 0), 1500);
     }
   };
 
@@ -85,17 +92,28 @@
   });
 </script>
 
-<h2 class="hidden lg:block text-7xl text-center text-white-300 font-bold mb-6 lg:mb-12 font-share">
+<h2
+  class="hidden lg:block text-7xl text-center text-white-300 font-bold mb-6 lg:mb-8 font-share"
+>
   C0DLE - JS Edition
 </h2>
 
-<h2 class="lg:hidden text-5xl text-center text-white-300 font-bold mt-3 lg:mt-0 lg:mb-12 font-share">
+<h2
+  class="lg:hidden text-5xl text-center text-white-300 font-bold mt-3 lg:mt-0 lg:mb-8 font-share"
+>
   C0DLE
 </h2>
 
-<h2 class="lg:hidden text-2xl text-center text-white-300 font-bold lg:mt-0 lg:mb-12 font-share">
+<h2
+  class="lg:hidden text-2xl text-center text-white-300 font-bold lg:mt-0 lg:mb-12 font-share"
+>
   JS Edition
 </h2>
+
+<div class="flex flex-row">
+  <Streak />
+  <Timer />
+</div>
 
 <div class="group relative block w-full">
   <div class="relative flex justify-center h-full rounded-2xl bg-gray-100">
@@ -104,24 +122,20 @@
         {title}
       </h2>
 
-      <p class="mt-4 text-justify font-semibold font-share text-sm sm:text-base">
+      <p
+        class="mt-4 text-justify font-semibold font-share text-sm sm:text-base"
+      >
         {description}
       </p>
     </div>
   </div>
 </div>
 
-<div class="group relative block w-full mt-6">
+<div class="group relative block w-full mt-4">
   <Editor bind:editorContent={code} />
 </div>
 
 <div class="relative flex justify-between w-full mt-6">
-  <button
-    on:click={testClicked}
-    class="rounded-full min-w-min font-share py-2 px-10 flex-grow-1 bg-white-300 uppercase font-semibold hover:line-through"
-  >
-    Test code 😉
-  </button>
 
   {#if notificationShow}
     <Notification
@@ -131,21 +145,13 @@
   {/if}
 
   <button
-    class="rounded-full min-w-min py-3 px-8 flex-grow-1 bg-green-200 uppercase font-share text-white-300 font-semibold hover:line-through disabled:line-through disabled:bg-green-100"
+    class="rounded-full w-full py-3 px-8 flex-grow-1 bg-green-200 uppercase font-share text-white-300 font-semibold hover:line-through disabled:line-through disabled:bg-green-100"
+    class:wrong={status == -1}
     disabled={status == 1}
     on:click={submitClicked}
   >
     Submit {#if status == 0}🤔{:else if status == -1}😢{:else}😀{/if}
   </button>
-</div>
-<div
-  class="relative lg:absolute flex justify-center items-center text-center mt-24 lg:mt-0 lg:right-32 lg:top-32 w-48"
->
-  <img src="/fire.png" alt="fire" width="100%" srcset="" />
-  <span
-    style="-webkit-text-stroke: 2px black; text-stroke: 2px black; font-size: 96px; margin-top: 80px;"
-    class="font-share absolute text-white-300">{$streak}</span
-  >
 </div>
 
 {#if confettiCannon}
@@ -156,3 +162,90 @@
     force={25}
   />
 {/if}
+
+<style>
+  .wrong {
+    -webkit-animation: shake-bottom 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+      both;
+    animation: shake-bottom 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  }
+
+  /* ----------------------------------------------
+ * Generated by Animista on 2023-11-11 17:36:26
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+  /**
+ * ----------------------------------------
+ * animation shake-bottom
+ * ----------------------------------------
+ */
+  @-webkit-keyframes shake-bottom {
+    0%,
+    100% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+    10% {
+      -webkit-transform: rotate(1deg);
+      transform: rotate(1deg);
+    }
+    20%,
+    40%,
+    60% {
+      -webkit-transform: rotate(-2deg);
+      transform: rotate(-2deg);
+    }
+    30%,
+    50%,
+    70% {
+      -webkit-transform: rotate(2deg);
+      transform: rotate(2deg);
+    }
+    80% {
+      -webkit-transform: rotate(-1deg);
+      transform: rotate(-1deg);
+    }
+    90% {
+      -webkit-transform: rotate(1deg);
+      transform: rotate(1deg);
+    }
+  }
+  @keyframes shake-bottom {
+    0%,
+    100% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+    10% {
+      -webkit-transform: rotate(1deg);
+      transform: rotate(1deg);
+    }
+    20%,
+    40%,
+    60% {
+      -webkit-transform: rotate(-2deg);
+      transform: rotate(-2deg);
+    }
+    30%,
+    50%,
+    70% {
+      -webkit-transform: rotate(2deg);
+      transform: rotate(2deg);
+    }
+    80% {
+      -webkit-transform: rotate(-1deg);
+      transform: rotate(-1deg);
+    }
+    90% {
+      -webkit-transform: rotate(1deg);
+      transform: rotate(1deg);
+    }
+  }
+</style>

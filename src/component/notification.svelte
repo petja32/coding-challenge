@@ -17,7 +17,7 @@
 
 {#if show}
   <div
-    transition:fly={{ delay: 100, duration: 200, y: 100, easing: cubicInOut }}
+    transition:fly={{ delay: 100, duration: 200, y: 50, easing: cubicInOut }}
     on:outroend={callback}
     id="notification"
     role="alert"
