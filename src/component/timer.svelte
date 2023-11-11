@@ -53,8 +53,10 @@
 <div class="mx-4 bg-white-300 rounded-full py-2 px-8 w-42">
   <div class="flex justify-center items-start gap-4">
     <div class="flex-1 text-gray-200 font-share">
+      {#if timer != "Challenge not done!"}
+        <span class="hidden lg:inline">Next in: </span>
+      {/if}
       <span>
-        {#if timer != "Challenge not done!"}Next in: {/if}
         {timer}
       </span>
     </div>

@@ -110,7 +110,7 @@
   JS Edition
 </h2>
 
-<div class="flex flex-row">
+<div class="flex flex-col lg:flex-row items-center">
   <Streak />
   <Timer />
 </div>
@@ -136,7 +136,6 @@
 </div>
 
 <div class="relative flex justify-between w-full mt-6">
-
   {#if notificationShow}
     <Notification
       bind:content={notificationContent}
