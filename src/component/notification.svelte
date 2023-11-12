@@ -11,7 +11,7 @@
 
     setTimeout(() => {
       show = false;
-    }, 4000);
+    }, 10000);
   });
 </script>
 
@@ -21,7 +21,7 @@
     on:outroend={callback}
     id="notification"
     role="alert"
-    class="lg:mx-12 w-full lg:w-auto bg-white-300 rounded-full py-3 px-8"
+    class="w-full lg:w-auto bg-white-300 rounded-full py-3 mt-4 px-8"
   >
     <div class="flex items-start gap-4">
       <div class="flex-1 text-gray-200 font-share">

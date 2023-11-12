@@ -65,6 +65,8 @@
       confettiCannon = true;
     } else {
       status = -1;
+      notificationShow = true;
+      notificationContent = runFunction();
       setTimeout(() => (status = 0), 1500);
     }
   };
@@ -131,7 +133,7 @@
   </div>
 </div>
 
-<div class="group relative block w-full mt-4">
+<div class="group relative block w-full">
   {#if challengeData}
     <Editor
       bind:editorContent={code}
@@ -143,14 +145,7 @@
   {/if}
 </div>
 
-<div class="relative flex justify-between w-full mt-6">
-  {#if notificationShow}
-    <Notification
-      bind:content={notificationContent}
-      callback={notificationCallback}
-    />
-  {/if}
-
+<div class="relative flex flex-col justify-between w-full mt-6">
   <button
     class="rounded-full w-full py-3 px-8 flex-grow-1 bg-green-200 uppercase font-share text-white-300 font-semibold hover:line-through disabled:line-through disabled:bg-green-100"
     class:wrong={status == -1}
@@ -159,6 +154,12 @@
   >
     Submit {#if status == 0}🤔{:else if status == -1}😢{:else}😀{/if}
   </button>
+  {#if notificationShow}
+    <Notification
+      bind:content={notificationContent}
+      callback={notificationCallback}
+    />
+  {/if}
 </div>
 
 {#if confettiCannon}
