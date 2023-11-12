@@ -132,7 +132,15 @@
 </div>
 
 <div class="group relative block w-full mt-4">
-  <Editor bind:editorContent={code} />
+  {#if challengeData}
+    <Editor
+      bind:editorContent={code}
+      variables={["a", "b"]
+        .slice(0, challengeData.test.length)
+        .toString()
+        .replace(",", ", ")}
+    />
+  {/if}
 </div>
 
 <div class="relative flex justify-between w-full mt-6">

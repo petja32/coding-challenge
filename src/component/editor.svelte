@@ -7,6 +7,7 @@
   import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
   import type { editor } from "monaco-editor";
   export let editorContent;
+  export let variables = "";
 
   let editorContainer: HTMLDivElement;
 
@@ -58,6 +59,10 @@
         useShadows: false,
       },
     });
+
+    createdEditor.setValue(`function Challenge(${variables}) {
+      
+}`);
 
     createdEditor.onDidChangeModelContent(() => {
       editorContent = createdEditor.getValue();
