@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { onMount, tick } from "svelte";
-  import { ConfettiCannon } from "svelte-canvas-confetti";
-  import Editor from "../component/editor.svelte";
-  import Notification from "../component/notification.svelte";
-  import { streak, last } from "$lib/store";
-  import Timer from "../component/timer.svelte";
-  import Streak from "../component/streak.svelte";
+  import { onMount, tick } from 'svelte';
+  import { ConfettiCannon } from 'svelte-canvas-confetti';
+  import Editor from '../component/editor.svelte';
+  import Notification from '../component/notification.svelte';
+  import { streak, last } from '$lib/store';
+  import Timer from '../component/timer.svelte';
+  import Streak from '../component/streak.svelte';
+  import Tree from '../component/tree.svelte';
 
   let code: any;
   let challengeData: any;
-  let title: string = "";
-  let description: string = "";
+  let title: string = '';
+  let description: string = '';
   let confettiCannon = false;
   let status = 0;
 
@@ -19,13 +20,13 @@
 
   const runFunction = () => {
     try {
-      let functionParameters = code.split("(")[1].split(")")[0];
-      if (functionParameters.includes(",")) {
-        functionParameters = functionParameters.split(",");
+      let functionParameters = code.split('(')[1].split(')')[0];
+      if (functionParameters.includes(',')) {
+        functionParameters = functionParameters.split(',');
       }
       let functionBody = code.substring(
-        code.indexOf("{") + 1,
-        code.lastIndexOf("}")
+        code.indexOf('{') + 1,
+        code.lastIndexOf('}')
       );
       let fn;
       switch (challengeData.test.length) {
@@ -85,7 +86,7 @@
 
   onMount(async () => {
     const day = new Date().getDate();
-    const resp = await fetch("/challenges.json");
+    const resp = await fetch('/challenges.json');
     const respJson = await resp.json();
     challengeData = respJson.data[day];
     title = challengeData.title;
@@ -137,13 +138,15 @@
   {#if challengeData}
     <Editor
       bind:editorContent={code}
-      variables={["a", "b"]
+      variables={['a', 'b']
         .slice(0, challengeData.test.length)
         .toString()
-        .replace(",", ", ")}
+        .replace(',', ', ')}
     />
   {/if}
 </div>
+
+<Tree></Tree>
 
 <div class="relative flex flex-col justify-between w-full mt-6">
   <button
@@ -254,6 +257,23 @@
     90% {
       -webkit-transform: rotate(1deg);
       transform: rotate(1deg);
+    }
+  }
+
+  @keyframes animate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes animate2 {
+    0% {
+      transform: rotate(360deg);
+    }
+    100% {
+      transform: rotate(0deg);
     }
   }
 </style>

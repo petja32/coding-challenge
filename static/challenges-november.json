@@ -1,0 +1,193 @@
+{
+  "data": [
+    {
+      "title": "Find Maximum Element in Array",
+      "description": "Write a function that takes an array of numbers as input and returns the maximum element in the array.",
+      "test": [[5, 2, 9, 1, 7]],
+      "expected": 9
+    },
+    {
+      "title": "Greatest Common Divisor",
+      "description": "Write a function that takes two positive integers and returns their greatest common divisor (GCD).",
+      "test": [12, 18],
+      "expected": 6
+    },
+    {
+      "title": "FizzBuzz",
+      "description": "Write a function that prints the numbers from 1 to 100 and separate them with a space. But for multiples of 3, print 'Fizz' instead of the number, and for the multiples of 5, print 'Buzz'. For numbers which are multiples of both three and five, print 'FizzBuzz'.",
+      "test": [],
+      "expected": "1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz Fizz 22 23 Fizz Buzz 26 Fizz 28 29 FizzBuzz 31 32 Fizz 34 Buzz Fizz 37 38 Fizz Buzz 41 Fizz 43 44 FizzBuzz 46 47 Fizz 49 Buzz Fizz 52 53 Fizz Buzz 56 Fizz 58 59 FizzBuzz 61 62 Fizz 64 Buzz Fizz 67 68 Fizz Buzz 71 Fizz 73 74 FizzBuzz 76 77 Fizz 79 Buzz Fizz 82 83 Fizz Buzz 86 Fizz 88 89 FizzBuzz 91 92 Fizz 94 Buzz Fizz 97 98 Fizz Buzz"
+    },
+    {
+      "title": "Even or Odd",
+      "description": "Write a function that determines whether a given number is even or odd. The function should return 'even' if the number is even, and 'odd' otherwise.",
+      "test": [10, 3],
+      "expected": "even"
+    },
+    {
+      "title": "Sum of Squares",
+      "description": "Write a function that takes two numbers as parameters and returns the sum of their squares.",
+      "test": [3, 4],
+      "expected": 25
+    },
+    {
+      "title": "Maximum of Two Numbers",
+      "description": "Write a function that accepts two numbers and returns the larger number.",
+      "test": [7, 3],
+      "expected": 7
+    },
+    {
+      "title": "Even or Odd",
+      "description": "Write a function that determines whether a given number is even or odd. The function should return 'even' if the number is even, and 'odd' otherwise.",
+      "test": [10, 3],
+      "expected": "even"
+    },
+    {
+      "title": "Factorial",
+      "description": "Write a function that calculates the factorial of a non-negative integer. The factorial of a number is the product of all positive integers less than or equal to that number.",
+      "test": [4],
+      "expected": 24
+    },
+    {
+      "title": "Reverse a String",
+      "description": "Write a function that takes a string as input and returns the reverse of the string.",
+      "test": ["hello"],
+      "expected": "olleh"
+    },
+    {
+      "title": "Palindrome Check",
+      "description": "Write a function that checks if a given string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward.",
+      "test": ["racecar"],
+      "expected": true
+    },
+    {
+      "title": "Sum of Array Elements",
+      "description": "Write a function that takes an array of numbers as input and returns the sum of all elements in the array.",
+      "test": [[1, 2, 3, 4, 5]],
+      "expected": 15
+    },
+    {
+      "title": "Find Maximum Element in Array",
+      "description": "Write a function that takes an array of numbers as input and returns the maximum element in the array.",
+      "test": [[5, 2, 9, 1, 7]],
+      "expected": 9
+    },
+    {
+      "title": "FizzBuzz",
+      "description": "Write a function that prints the numbers from 1 to 100. But for multiples of 3, print 'Fizz' instead of the number, and for the multiples of 5, print 'Buzz'. For numbers which are multiples of both three and five, print 'FizzBuzz'.",
+      "test": [],
+      "expected": "1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz Fizz 22 23 Fizz Buzz 26 Fizz 28 29 FizzBuzz 31 32 Fizz 34 Buzz Fizz 37 38 Fizz Buzz 41 Fizz 43 44 FizzBuzz 46 47 Fizz 49 Buzz Fizz 52 53 Fizz Buzz 56 Fizz 58 59 FizzBuzz 61 62 Fizz 64 Buzz Fizz 67 68 Fizz Buzz 71 Fizz 73 74 FizzBuzz 76 77 Fizz 79 Buzz Fizz 82 83 Fizz Buzz 86 Fizz 88 89 FizzBuzz 91 92 Fizz 94 Buzz Fizz 97 98 Fizz Buzz"
+    },
+    {
+      "title": "Count Vowels in a String",
+      "description": "Write a function that takes a string as input and returns the number of vowels (a, e, i, o, u) in the string.",
+      "test": ["hello"],
+      "expected": 2
+    },
+    {
+      "title": "Calculate Power",
+      "description": "Write a function that takes two integers, base and exponent, and calculates the value of base raised to the power of exponent.",
+      "test": [2, 5],
+      "expected": 32
+    },
+    {
+      "title": "Remove Duplicates from Array",
+      "description": "Write a function that takes an array of integers as input and returns a new array without any duplicate elements.",
+      "test": [[1, 2, 2, 3, 4, 4, 5]],
+      "expected": [1, 2, 3, 4, 5]
+    },
+    {
+      "title": "Check Prime Number",
+      "description": "Write a function that checks if a given number is a prime number. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.",
+      "test": [7],
+      "expected": true
+    },
+    {
+      "title": "Greatest Common Divisor",
+      "description": "Write a function that takes two positive integers and returns their greatest common divisor (GCD).",
+      "test": [12, 18],
+      "expected": 6
+    },
+    {
+      "title": "Generate Fibonacci Series",
+      "description": "Write a function that generates the Fibonacci series up to a specified number of terms. The Fibonacci series is a sequence of numbers in which each number is the sum of the two preceding ones, starting from 0 and 1.",
+      "test": [8],
+      "expected": [0, 1, 1, 2, 3, 5, 8, 13]
+    },
+    {
+      "title": "Title Case a Sentence",
+      "description": "Write a function that takes a sentence as input and returns the sentence with the first letter of each word capitalized.",
+      "test": ["hello world"],
+      "expected": "Hello World"
+    },
+    {
+      "title": "Find Missing Number",
+      "description": "Write a function that takes an array containing n distinct numbers taken from 0, 1, 2, ..., n, and finds the one that is missing from the array.",
+      "test": [[3, 1, 0, 5, 2]],
+      "expected": 4
+    },
+    {
+      "title": "Calculate Factorial",
+      "description": "Write a function that calculates the factorial of a non-negative integer using recursion. The factorial of a number is the product of all positive integers less than or equal to that number.",
+      "test": [5],
+      "expected": 120
+    },
+    {
+      "title": "Rotate Array",
+      "description": "Write a function that rotates an array to the right by a given number of steps. For example, if the array is [1, 2, 3, 4, 5] and the rotation steps is 2, the rotated array would be [4, 5, 1, 2, 3].",
+      "test": [[1, 2, 3, 4, 5], 2],
+      "expected": [4, 5, 1, 2, 3]
+    },
+    {
+      "title": "Check Anagrams",
+      "description": "Write a function that checks if two given strings are anagrams of each other. Anagrams are words or phrases formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.",
+      "test": ["listen", "silent"],
+      "expected": true
+    },
+    {
+      "title": "Find Intersection of Two Arrays",
+      "description": "Write a function that takes two arrays as input and returns an array containing their intersection. The intersection is the set of elements that are common to both arrays.",
+      "test": [
+        [1, 2, 3, 4, 5],
+        [3, 4, 5, 6, 7]
+      ],
+      "expected": [3, 4, 5]
+    },
+    {
+      "title": "Count Words in a Sentence",
+      "description": "Write a function that takes a sentence as input and returns the number of words in the sentence. Words are separated by spaces.",
+      "test": ["This is a sample sentence."],
+      "expected": 5
+    },
+    {
+      "title": "Calculate Square Root",
+      "description": "Write a function that calculates the square root of a given non-negative integer. You may assume that the input is a perfect square.",
+      "test": [25],
+      "expected": 5
+    },
+    {
+      "title": "Binary Search",
+      "description": "Write a function that performs binary search on a sorted array of integers. The function should return the index of the target element if it exists in the array, or -1 otherwise.",
+      "test": [[1, 3, 5, 7, 9, 11, 13], 7],
+      "expected": 3
+    },
+    {
+      "title": "Find Longest Word in a Sentence",
+      "description": "Write a function that takes a sentence as input and returns the longest word in the sentence. Words are separated by spaces.",
+      "test": ["This is a sample sentence with some long words."],
+      "expected": "sentence"
+    },
+    {
+      "title": "Calculate Power of Two",
+      "description": "Write a function that checks if a given number is a power of two. A number is a power of two if it is 2 raised to some integer power.",
+      "test": [16],
+      "expected": true
+    },
+    {
+      "title": "Check Balanced Parentheses",
+      "description": "Write a function that checks if a given string of parentheses is balanced. Balanced parentheses mean that each opening parenthesis has a corresponding closing parenthesis and they occur in the correct order.",
+      "test": ["(()))"],
+      "expected": false
+    }
+  ]
+}
